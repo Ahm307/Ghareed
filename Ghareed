@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>غرد</title>
+
+<style>
+:root{
+  --main-color:#1db954;
+  --bg:#f5f5f5;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+}
+
+header{
+  background:var(--main-color);
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:15px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  background:var(--main-color);
+  color:white;
+  border:none;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.lang-switch{
+  float:left;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  غرد
+  <span class="lang-switch" onclick="toggleLang()">🌍</span>
+</header>
+
+<div class="container">
+
+  <div class="card" id="loginCard">
+    <h3 id="loginTitle">تسجيل الدخول</h3>
+    <input type="text" id="username" placeholder="اسم المستخدم">
+    <button onclick="login()" id="loginBtn">دخول</button>
+  </div>
+
+  <div id="mainApp" style="display:none;">
+    <div class="card">
+      <textarea id="postInput" placeholder="وش تفكر فيه؟"></textarea>
+      <button onclick="addPost()" id="postBtn">نشر</button>
+    </div>
+
+    <div id="feed"></div>
+  </div>
+
+</div>
+
+<script>
+let currentLang = "ar";
+
+const translations = {
+  ar: {
+    login:"تسجيل الدخول",
+    loginBtn:"دخول",
+    placeholder:"وش تفكر فيه؟",
+    post:"نشر"
+  },
+  en: {
+    login:"Login",
+    loginBtn:"Sign In",
+    placeholder:"What's happening?",
+    post:"Post"
+  }
+};
+
+function toggleLang(){
+  currentLang = currentLang === "ar" ? "en" : "ar";
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+
+  document.getElementById("loginTitle").innerText = translations[currentLang].login;
+  document.getElementById("loginBtn").innerText = translations[currentLang].loginBtn;
+  document.getElementById("postInput").placeholder = translations[currentLang].placeholder;
+  document.getElementById("postBtn").innerText = translations[currentLang].post;
+}
+
+function login(){
+  const user = document.getElementById("username").value;
+  if(user.trim() === "") return alert("اكتب اسم");
+  document.getElementById("loginCard").style.display="none";
+  document.getElementById("mainApp").style.display="block";
+}
+
+function addPost(){
+  const text = document.getElementById("postInput").value;
+  if(text.trim()==="") return;
+
+  const post = document.createElement("div");
+  post.className="card";
+  post.innerText=text;
+
+  document.getElementById("feed").prepend(post);
+  document.getElementById("postInput").value="";
+}
+</script>
+
+</body>
+</html>
