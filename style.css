@@ -1,0 +1,54 @@
+:root{
+  --green:#1db954;
+}
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f3f3f3;
+}
+
+header{
+  background:var(--green);
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  background:var(--green);
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.post{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-top:10px;
+}
+
+.like{
+  cursor:pointer;
+  color:var(--green);
+  font-weight:bold;
+}
